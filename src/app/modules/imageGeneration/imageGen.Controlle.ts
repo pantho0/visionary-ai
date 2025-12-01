@@ -1,18 +1,19 @@
 import { Request, Response } from 'express';
 import { imageGenService } from './imageGen.service';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import status from 'http-status';
 
-const generateImage = async (_req: Request, res: Response) => {
-  try {
-    const result = await imageGenService.generateImageViaAPI();
-    return res
-      .status(200)
-      .json({ message: 'Image generated successfully', data: result });
-  } catch (error: any) {
-    res
-      .status(500)
-      .json({ message: 'Error generating image', error: error.message });
-  }
-};
+const generateImage = catchAsync(async (req, res) => {
+  console.log(req.body);
+  const result = await imageGenService.generateImageViaAPI(req.body.prompt);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Image Generated Successfully',
+    data: result,
+  });
+});
 
 export const imageGenController = {
   generateImage,

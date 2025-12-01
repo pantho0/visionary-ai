@@ -3,5 +3,5 @@ import { imageGenController } from './imageGen.Controlle';
 
 const router = Router();
 
-router.get('/', imageGenController.generateImage);
+router.post('/', imageGenController.generateImage);
 export const ImageGenRoute = router;
