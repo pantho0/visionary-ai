@@ -16,7 +16,7 @@ const generateImageWithFlux1SNEll = catchAsync(async (req, res) => {
 });
 
 const generateImageWithSDXL = catchAsync(async (req, res) => {
-  console.log(req.body.prompt);
+  console.log(req.body);
   const result = await imageGenService.generateWithSDXL(req.body.prompt);
   sendResponse(res, {
     statusCode: status.OK,

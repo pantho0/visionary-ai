@@ -4,7 +4,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import router from './app/routes';
 const app: Application = express();
 
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
