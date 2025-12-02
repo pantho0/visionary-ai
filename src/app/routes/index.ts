@@ -5,7 +5,7 @@ const router = Router();
 
 const moduleRoutes = [
   {
-    path: '/genimg',
+    path: '/gen-img',
     route: ImageGenRoute,
   },
 ];

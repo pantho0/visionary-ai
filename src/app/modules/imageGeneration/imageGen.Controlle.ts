@@ -4,7 +4,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import status from 'http-status';
 
-const generateImage = catchAsync(async (req, res) => {
+const generateImageWithFlux1SNEll = catchAsync(async (req, res) => {
   console.log(req.body);
   const result = await imageGenService.generateImageViaAPI(req.body.prompt);
   sendResponse(res, {
@@ -15,6 +15,18 @@ const generateImage = catchAsync(async (req, res) => {
   });
 });
 
+const generateImageWithSDXL = catchAsync(async (req, res) => {
+  console.log(req.body.prompt);
+  const result = await imageGenService.generateWithSDXL(req.body.prompt);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Image Generated Successfully',
+    data: result,
+  });
+});
+
 export const imageGenController = {
-  generateImage,
+  generateImage: generateImageWithFlux1SNEll,
+  generateImageWithSDXL,
 };
