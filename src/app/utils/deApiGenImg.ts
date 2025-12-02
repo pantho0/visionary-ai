@@ -1,12 +1,21 @@
-import fetch from 'node-fetch'; // assuming this is a Node.js environment
+import fetch from 'node-fetch';
+import { downloadAndEncodeImage } from './convertImageToBase64';
+import { uploadToImageBB } from './imageBBUpload';
+import { genImgRes } from '../interface/response';
 
 const API_KEY = process.env.DEAPI_API_KEY!;
+const IMGBB_API_KEY = process.env.IMGBB_API_KEY!;
 const BASE_URL = 'https://api.deapi.ai/api/v1/client';
 
-// Helper function to pause execution
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export const deGenerateImage = async (prompt: string): Promise<string> => {
+export const deGenerateImage = async (
+  prompt: string,
+): Promise<genImgRes | null | undefined | unknown> => {
+  if (!IMGBB_API_KEY) {
+    throw new Error('IMGBB_API_KEY environment variable is not set.');
+  }
+
   const initRes = await fetch(`${BASE_URL}/txt2img`, {
     method: 'POST',
     headers: {
@@ -16,7 +25,6 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
     },
     body: JSON.stringify({
       prompt,
-      // Keeping your existing parameters
       model: 'Flux1schnell',
       width: 512,
       height: 512,
@@ -39,9 +47,8 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
 
   console.log(`Request submitted. Task ID: ${requestId}`);
 
-  // --- 2️⃣ Implement the POLLING LOOP to grab the result ---
   let status = 'pending';
-  const maxPollAttempts = 45; // Set a sensible limit to prevent infinite loops
+  const maxPollAttempts = 45;
   let attempts = 0;
 
   while (
@@ -50,7 +57,7 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
     attempts < maxPollAttempts
   ) {
     attempts++;
-    await sleep(3000); // Wait 3 seconds between checks (adjust as needed)
+    await sleep(3000);
 
     const pollRes = await fetch(`${BASE_URL}/request-status/${requestId}`, {
       method: 'GET',
@@ -66,7 +73,7 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
     }
 
     const { data: pollData } = (await pollRes.json()) as {
-      data: { status: string; result_url?: string };
+      data: { status: string; result_url?: string; preview?: string };
     };
     status = pollData.status;
 
@@ -74,7 +81,14 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
 
     if (status === 'done') {
       if (pollData.result_url) {
-        return pollData.result_url; // 🎉 SUCCESS: Return the image URL
+        const fullSizeBase64 = await downloadAndEncodeImage(
+          pollData.result_url,
+        );
+
+        const imgbbUrl: { url: string; delete_url: string } =
+          await uploadToImageBB(fullSizeBase64);
+
+        return imgbbUrl;
       } else {
         throw new Error('Image generation completed, but no result_url found.');
       }
@@ -89,6 +103,5 @@ export const deGenerateImage = async (prompt: string): Promise<string> => {
     throw new Error('Exceeded max polling attempts. Task timed out.');
   }
 
-  // This line should technically be unreachable if logic is correct
   return 'Polling ended without result.';
 };
