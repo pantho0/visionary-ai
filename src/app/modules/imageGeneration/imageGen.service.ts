@@ -14,7 +14,13 @@ const generateWithSDXL = async (prompt: string) => {
   return result;
 };
 
+const getAllImagesFromDB = async () => {
+  const result = await ImageGenerate.find();
+  return result;
+};
+
 export const imageGenService = {
   generateImageViaAPI: generateImageViaAPIFLUX,
   generateWithSDXL,
+  getAllImagesFromDB,
 };

@@ -26,7 +26,18 @@ const generateImageWithSDXL = catchAsync(async (req, res) => {
   });
 });
 
+const getAllImages = catchAsync(async (req: Request, res: Response) => {
+  const result = await imageGenService.getAllImagesFromDB();
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'Images retrieved successfully',
+    data: result,
+  });
+});
+
 export const imageGenController = {
   generateImage: generateImageWithFlux1SNEll,
   generateImageWithSDXL,
+  getAllImages,
 };
