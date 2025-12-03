@@ -48,7 +48,7 @@ export const deGenerateImage = async (
   console.log(`Request submitted. Task ID: ${requestId}`);
 
   let status = 'pending';
-  const maxPollAttempts = 45;
+  const maxPollAttempts = 15;
   let attempts = 0;
 
   while (
