@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import fetch from 'node-fetch';
 
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY!;
 const IMGBB_UPLOAD_URL = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;

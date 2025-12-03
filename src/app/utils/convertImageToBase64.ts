@@ -1,7 +1,6 @@
-import fetch from 'node-fetch';
-
 export const downloadAndEncodeImage = async (url: string): Promise<string> => {
   console.log('Downloading full-size image from deAPI result_url...');
+
   const imageRes = await fetch(url);
 
   if (!imageRes.ok) {
@@ -11,7 +10,8 @@ export const downloadAndEncodeImage = async (url: string): Promise<string> => {
     );
   }
 
-  const imageBuffer = await imageRes.buffer(); // Convert the buffer to a Base64 string (this is the full-size image data)
+  const arrayBuffer = await imageRes.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
 
-  return imageBuffer.toString('base64');
+  return buffer.toString('base64');
 };

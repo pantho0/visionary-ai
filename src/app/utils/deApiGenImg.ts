@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { downloadAndEncodeImage } from './convertImageToBase64';
 import { uploadToImageBB } from './imageBBUpload';
 import { genImgRes } from '../interface/response';

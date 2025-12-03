@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { uploadToImageBB } from './imageBBUpload';
 const SDXL_BASE_URL = process.env.SDXL_BASE_URL;
 const SDXL_API_KEY = process.env.SDXL_API_KEY;

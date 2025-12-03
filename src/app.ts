@@ -4,8 +4,8 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import router from './app/routes';
 const app: Application = express();
 
-app.use(cors({ origin: '*' }));
 app.use(express.json());
+app.use(cors({ origin: '*' }));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to Visionary-AI');
