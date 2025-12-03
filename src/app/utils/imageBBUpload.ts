@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch from 'node-fetch';
 
 const IMGBB_API_KEY = process.env.IMGBB_API_KEY!;

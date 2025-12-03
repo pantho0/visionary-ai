@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { GoogleGenAI } from '@google/genai';
 import * as fs from 'node:fs';
 
