@@ -2,8 +2,7 @@
 
 A state-of-the-art **text-to-image generation** platform built to transform text prompts into stunning visual art using a specialized third-party AI model. The system is designed for high performance and reliability, utilizing **Node.js, Express.js, TypeScript**, and **Next.js**.
 
-[](https://www.google.com/search?q=YOUR_LIVE_DEMO_LINK)
-[](https://www.google.com/search?q=YOUR_BACKEND_REPO_LINK)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-blue?style=for-the-badge)](https://visionary-ai-client.vercel.app/)
 
 ---
 
@@ -39,11 +38,10 @@ This project leverages a full-stack JavaScript ecosystem, focusing on type safet
 
 ### Tools & Libraries
 
-|                                     |                                                         |                                     |
-| :---------------------------------: | :-----------------------------------------------------: | :---------------------------------: |
-|       [](https://nodejs.org/)       |               [](https://expressjs.com/)                | [](https://www.typescriptlang.org/) |
-|       [](https://nextjs.org/)       |              [](https://www.mongodb.com/)               |     [](https://mongoosejs.com/)     |
-| [](https://workers.cloudflare.com/) | [](https://www.google.com/search?q=DEAPI_PROVIDER_LINK) |       [](https://imgbb.com/)        |
+|                                                                                                                                     |                                                                                                                                                      |                                                                                                                                      |
+| :---------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: |
+|  [![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)  | [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) | [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/) |
+| [![Mongoose](https://img.shields.io/badge/Mongoose-800?style=for-the-badge&logo=mongoose&logoColor=white)](https://mongoosejs.com/) |              [![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)               |     [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)     |
 
 ---
 
@@ -138,7 +136,3 @@ cd visionary-ai-client
 The **frontend** application will be accessible at `http://localhost:3000` (or the port specified by Next.js).
 
 ---
-
-```
-
-```
