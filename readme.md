@@ -1,12 +1,10 @@
 # 🤖 Visionary AI: Text-to-Image Generation Platform
 
-A state-of-the-art **text-to-image generation** platform built to transform text prompts into stunning visual art using a specialized third-party AI model. The system is designed for high performance and reliability, utilizing **Node.js, Express.js, TypeScript**, and **Next.js**.
+A state-of-the-art **text-to-image generation** platform built to transform text prompts into stunning visual art using two specialized third-party AI model. The system is designed for high performance and reliability, utilizing **Node.js, Express.js, TypeScript**, **MongoDB**, **Mongoose** and **Next.js**.
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-blue?style=for-the-badge)](https://visionary-ai-client.vercel.app/)
 
 ---
-
---
 
 ## 🏗️ System Architecture & Workflow
 
@@ -14,7 +12,7 @@ The platform employs a robust microservice-like workflow to handle image generat
 
 1.  **Client Request (Next.js):** The user submits a text prompt.
 2.  **API Gateway (Express/TS):** The backend receives the prompt.
-3.  **API Call:** The backend sends the prompt to a **DeAI third-party API** via **Cloudflare Worker**.
+3.  **API Call:** The backend sends the prompt to one of the **DeAI third-party API** and **Cloudflare Worker**.
 4.  **AI Processing:** The AI model generates the image.
 5.  **Image Return & Storage:** The image is sent back to the backend, which then uploads and saves it to **ImageBB** for permanent hosting.
 6.  **Response:** The backend returns the hosted image URL and relevant metadata to the Next.js frontend.
@@ -33,7 +31,8 @@ This project leverages a full-stack JavaScript ecosystem, focusing on type safet
 | **Backend**       | **Node.js** with **Express.js**                      |
 | **Language**      | **TypeScript** (For both frontend and backend)       |
 | **Database**      | **MongoDB** with **Mongoose** (ODM)                  |
-| **Serverless**    | **Cloudflare Workers** (For proxying/API calls)      |
+| **AI MODEL API**  | **Cloudflare Workers** (API calls)                   |
+| **AI MODEL API**  | **DEAPI** (API calls)                                |
 | **Image Hosting** | **ImageBB** (External image storage)                 |
 
 ### Tools & Libraries
@@ -59,8 +58,8 @@ This project leverages a full-stack JavaScript ecosystem, focusing on type safet
 
 ### 🌐 **Performance & Scalability**
 
-- **Cloudflare Workers:** Utilized as an intermediary layer for efficient and low-latency API proxying.
-- **Next.js & Serverless Backend:** Provides fast initial load times and scalable backend operations.
+- **Cloudflare Workers:** We utilize this serverless compute environment as a dedicated, low-latency API endpoint.
+- **DeAPI (Third-Party AI Model):** This is the high-performance engine responsible for the actual text-to-image synthesis.
 - **Type Safety:** **TypeScript** throughout the stack minimizes runtime errors and improves code maintainability.
 
 ---
