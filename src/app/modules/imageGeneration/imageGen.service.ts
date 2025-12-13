@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { generateImgSDXLBaseModel } from '../../utils/cldf.sdxl.base_model';
 import { deGenerateImage } from '../../utils/deApiGenImg';
 import createWithOpenJourney from '../../utils/openJourney';
@@ -21,8 +23,15 @@ const getAllImagesFromDB = async () => {
 };
 
 const genWithOpenJourneyFromApi = async (userPrompt: string) => {
-  const generatedIMGData = await createWithOpenJourney(userPrompt);
-  return generatedIMGData;
+  const generatedIMGData = (await createWithOpenJourney(userPrompt)) as any;
+
+  const resData = {
+    url: generatedIMGData.url,
+    delete_url: generatedIMGData.delete_url,
+  };
+
+  const result = await ImageGenerate.create(resData);
+  return result;
 };
 
 export const imageGenService = {
