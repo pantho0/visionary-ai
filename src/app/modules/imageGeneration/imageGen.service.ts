@@ -1,5 +1,6 @@
 import { generateImgSDXLBaseModel } from '../../utils/cldf.sdxl.base_model';
 import { deGenerateImage } from '../../utils/deApiGenImg';
+import createWithOpenJourney from '../../utils/openJourney';
 import { ImageGenerate } from './imageGen.model';
 
 const generateImageViaAPIFLUX = async (usrPrompt: string) => {
@@ -19,8 +20,14 @@ const getAllImagesFromDB = async () => {
   return result;
 };
 
+const genWithOpenJourneyFromApi = async (userPrompt: string) => {
+  const generatedIMGData = await createWithOpenJourney(userPrompt);
+  return generatedIMGData;
+};
+
 export const imageGenService = {
   generateImageViaAPI: generateImageViaAPIFLUX,
   generateWithSDXL,
   getAllImagesFromDB,
+  genWithOpenJourneyFromApi,
 };
