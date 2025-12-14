@@ -23,16 +23,20 @@ const getAllImagesFromDB = async () => {
 };
 
 const genWithOpenJourneyFromApi = async (userPrompt: string) => {
-  const generatedIMGData = (await createWithOpenJourney(userPrompt)) as any;
+  const generatedIMGData = await createWithOpenJourney(userPrompt);
 
-  const resData = {
-    url: generatedIMGData.url,
-    delete_url: generatedIMGData.delete_url,
-  };
+  console.log(generatedIMGData);
 
-  const result = await ImageGenerate.create(resData);
+  if (!generatedIMGData.success) {
+    throw new Error(generatedIMGData.message);
+  }
+
+  const { url, delete_url } = generatedIMGData;
+
+  const result = await ImageGenerate.create({ url, delete_url });
   return result;
 };
+
 
 export const imageGenService = {
   generateImageViaAPI: generateImageViaAPIFLUX,
